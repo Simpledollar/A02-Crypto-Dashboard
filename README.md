@@ -1,8 +1,6 @@
 # A02-Crypto-Dashboard
 
-Một dashboard đơn giản hiển thị giá Bitcoin và Ethereum theo thời gian thực, có hiệu ứng trực quan khi giá thay đổi.
+Dashboard hiển thị giá Bitcoin, Ethereum, Solana và Binance Coin theo thời gian thực.
 
-## 🚀 Cách chạy
-1. Cài đặt thư viện:
-   ```bash
-   pip install -r requirements.txt
+## 📊 Giao diện
+![Crypto Dashboard](assets/dashboard.png)
