@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .card {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .price {
+            font-size: 2em;
+            transition: color 0.5s ease;
+        }
+        .up {
+            color: green;
+            animation: blink 0.5s;
+        }
+        .down {
+            color: red;
+            animation: blink 0.5s;
+        }
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Crypto Dashboard</h1>
+    <div class="card">
+        <h2>Bitcoin (BTC)</h2>
+        <div id="btc" class="price">{{ btc }}</div>
+    </div>
+    <div class="card">
+        <h2>Ethereum (ETH)</h2>
+        <div id="eth" class="price">{{ eth }}</div>
+    </div>
+
+    <script>
+        // Giả lập hiệu ứng giá thay đổi mỗi 5 giây
+        function randomUpdate(id) {
+            let el = document.getElementById(id);
+            let oldValue = parseFloat(el.innerText);
+            let newValue = (oldValue + (Math.random() - 0.5) * 100).toFixed(2);
+            el.innerText = newValue;
+
+            if (newValue > oldValue) {
+                el.className = "price up";
+            } else {
+                el.className = "price down";
+            }
+        }
+
+        setInterval(() => {
+            randomUpdate("btc");
+            randomUpdate("eth");
+        }, 5000);
+    </script>
+</body>
+</html>

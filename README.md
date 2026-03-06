@@ -1,9 +1,8 @@
 # A02-Crypto-Dashboard
 
-Dự án số 2 trong Git City.  
-Hiển thị giá các token lớn (BTC, ETH, BNB) bằng bảng và biểu đồ.
+Một dashboard đơn giản hiển thị giá Bitcoin và Ethereum theo thời gian thực, có hiệu ứng trực quan khi giá thay đổi.
 
-## Cách chạy
-```bash
-pip install -r requirements.txt
-python dashboard.py
+## 🚀 Cách chạy
+1. Cài đặt thư viện:
+   ```bash
+   pip install -r requirements.txt

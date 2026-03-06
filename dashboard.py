@@ -1,30 +1,17 @@
+from flask import Flask, render_template
 import requests
-import pandas as pd
-import matplotlib.pyplot as plt
-import time
 
-tokens = ["bitcoin", "ethereum", "binancecoin"]
+app = Flask(__name__)
 
-while True:
-    # Lấy dữ liệu giá từ CoinGecko
-    data = {}
-    for token in tokens:
-        url = f"https://api.coingecko.com/api/v3/simple/price?ids={token}&vs_currencies=usd"
-        response = requests.get(url).json()
-        data[token] = response[token]["usd"]
+@app.route("/")
+def index():
+    # Lấy dữ liệu giá Bitcoin và Ethereum từ CoinGecko API
+    url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd"
+    data = requests.get(url).json()
+    btc_price = data["bitcoin"]["usd"]
+    eth_price = data["ethereum"]["usd"]
 
-    # Hiển thị bảng với pandas
-    df = pd.DataFrame(list(data.items()), columns=["Token", "Price (USD)"])
-    print(df)
+    return render_template("index.html", btc=btc_price, eth=eth_price)
 
-    # Vẽ biểu đồ với matplotlib
-    plt.figure(figsize=(8,5))
-    plt.bar(df["Token"], df["Price (USD)"], color=["orange","blue","green"])
-    plt.title("Giá các token lớn (USD)")
-    plt.xlabel("Token")
-    plt.ylabel("Giá (USD)")
-    plt.show()
-
-    # Chờ 5 phút rồi cập nhật lại
-    print("Đang chờ 5 phút để cập nhật lại...\n")
-    time.sleep(30)
+if __name__ == "__main__":
+    app.run(debug=True)
